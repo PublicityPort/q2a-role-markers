@@ -10,8 +10,7 @@ This is a plugin for **Question2Answer** that adds markers for special roles.
 Features
 --------
 
-- add image overlay to avatars for admin, mod, editor, and experts
-- add text label before name in user_meta and users list
+- add fontawesome icons or text label before name in user_meta and users list
 - specify type of post to add to
 - hover text shows role
 - css customizable via admin/plugins
@@ -33,7 +32,7 @@ Installation
 .. _Question2Answer: http://www.question2answer.org/install.php
 .. _git: http://git-scm.com/
 .. _github:
-.. _project page: https://github.com/NoahY/q2a-role-markers
+.. _project page: https://github.com/gurjyot/q2a-role-markers
 
 ----------
 Disclaimer

@@ -1,0 +1,13 @@
+{
+    "name": "Role Markers",
+    "uri": "https://github.com/gurjyot/q2a-role-marker",
+    "description": "Adds role markers to avatars and username",
+    "version": "1",
+    "date": "2017-11-25",
+    "author": "NoahY (extended by Gurjyot Singh)",
+    "author_uri": "",
+    "license": "GPLv2",
+    "update_uri": "https://raw.githubusercontent.com/gurjyot/q2a-role-markers/master/metadata.json",
+    "min_q2a": "1.8 beta-1",
+    "min_php": "5.2"
+}

@@ -9,34 +9,43 @@
 		function option_default($option) {
 
 			switch($option) {
-				case 'marker_plugin_who_text':
-					return '&diams;';
+				case 'marker_plugin_who_text_admin':
+					return '<i class="fa fa-shield" aria-hidden="true"></i>';
+				case 'marker_plugin_who_text_moderator':
+					return '<i class="fa fa-bolt" aria-hidden="true"></i>';
+				case 'marker_plugin_who_text_editor':
+					return '<i class="fa fa-wrench" aria-hidden="true"></i>';
+				case 'marker_plugin_who_text_expert':
+					return '<i class="fa fa-heart" aria-hidden="true"></i>';
 				case 'marker_plugin_css_2':
 					return '
 .qa-q-item-avatar,.qa-q-view-avatar,.qa-a-item-avatar,.qa-c-item-avatar {
 	position:relative;
 }
+.qa-who-marker i {
+	font-size: 110%;
+}
 .qa-who-marker {
 	cursor: pointer;
-	font-size: 200%;
-	margin-right: 2px;
-	vertical-align: sub;
-	line-height: 50%;
+	margin: 0px 2px;
+}
+.qa-who-marker{
+	vertical-align: middle;
 }
 .qa-who-marker-expert {
-	color: #4D90FE;
+	color: #34495e;
 }				
 .qa-who-marker-editor {
-	color: #CB9114;
+	color: #34495e;
 }				
 .qa-who-marker-moderator {
-	color: #CDCDCD;
-}				
+	color: #34495e;
+}			
 .qa-who-marker-admin {
-	color: #EEDD0F;
-}				
+	color: #34495e;
+}	
 .qa-avatar-marker {
-	right:0;
+	left:0;
 	bottom:0;
 	position:absolute;
 }';
@@ -54,33 +63,18 @@
 			$ok = null;
 			if (qa_clicked('marker_save_button')) {
 				qa_opt('marker_plugin_css_2',qa_post_text('marker_plugin_css_2'));
-				qa_opt('marker_plugin_who_text',qa_post_text('marker_plugin_who_text'));
-
-
-				qa_opt('marker_plugin_a_qv',(bool)qa_post_text('marker_plugin_a_qv'));
-				qa_opt('marker_plugin_a_qi',(bool)qa_post_text('marker_plugin_a_qi'));
-				qa_opt('marker_plugin_a_a',(bool)qa_post_text('marker_plugin_a_a'));
-				qa_opt('marker_plugin_a_c',(bool)qa_post_text('marker_plugin_a_c'));
+				qa_opt('marker_plugin_who_text_admin',qa_post_text('marker_plugin_who_text_admin'));
+				qa_opt('marker_plugin_who_text_moderator',qa_post_text('marker_plugin_who_text_moderator'));
+				qa_opt('marker_plugin_who_text_editor',qa_post_text('marker_plugin_who_text_expert'));
+				qa_opt('marker_plugin_who_text_expert',qa_post_text('marker_plugin_who_text_editor'));
 
 				qa_opt('marker_plugin_w_users',(bool)qa_post_text('marker_plugin_w_users'));
 				qa_opt('marker_plugin_w_qv',(bool)qa_post_text('marker_plugin_w_qv'));
 				qa_opt('marker_plugin_w_qi',(bool)qa_post_text('marker_plugin_w_qi'));
 				qa_opt('marker_plugin_w_a',(bool)qa_post_text('marker_plugin_w_a'));
 				qa_opt('marker_plugin_w_c',(bool)qa_post_text('marker_plugin_w_c'));
-/*
+
 				
-				qa_opt('share_plugin_facebook_weight',(int)qa_post_text('share_plugin_facebook_weight'));
-				qa_opt('share_plugin_twitter_weight',(int)qa_post_text('share_plugin_twitter_weight'));
-				qa_opt('share_plugin_google_weight',(int)qa_post_text('share_plugin_google_weight'));
-				qa_opt('share_plugin_linkedin_weight',(int)qa_post_text('share_plugin_linkedin_weight'));
-				qa_opt('share_plugin_email_weight',(int)qa_post_text('share_plugin_email_weight'));
-				
-				qa_opt('share_plugin_widget_only',(bool)qa_post_text('share_plugin_widget_only'));
-				qa_opt('share_plugin_widget_title',qa_post_text('share_plugin_widget_title'));
-				
-				qa_opt('share_plugin_suggest',(int)qa_post_text('share_plugin_suggest'));
-				qa_opt('share_plugin_suggest_text',qa_post_text('share_plugin_suggest_text'));
-*/				
 				$ok = qa_lang('admin/options_saved');
 			}
 			else if (qa_clicked('marker_reset_button')) {
@@ -102,187 +96,78 @@
 				'type' => 'textarea',
 				'rows' => 20
 			);
+
 			$fields[] = array(
 				'type' => 'blank',
 			);			
-			$fields[] = array(
-				'label' => 'Show avatar markers in questions on pages',
-				'tags' => 'NAME="marker_plugin_a_qv"',
-				'value' => qa_opt('marker_plugin_a_qv'),
-				'type' => 'checkbox',
-			);
-			$fields[] = array(
-				'label' => 'Show avatar markers in questions in lists',
-				'tags' => 'NAME="marker_plugin_a_qi"',
-				'value' => qa_opt('marker_plugin_a_qi'),
-				'type' => 'checkbox',
-			);
 			
 			$fields[] = array(
-				'label' => 'Show avatar markers in answers',
-				'tags' => 'NAME="marker_plugin_a_a"',
-				'value' => qa_opt('marker_plugin_a_a'),
-				'type' => 'checkbox',
+				'label' => 'Marker text to show after Admin names',
+				'tags' => 'NAME="marker_plugin_who_text_admin"',
+				'value' => qa_opt('marker_plugin_who_text_admin'),
+				'type' => 'textarea',
+				'rows' => 1
 			);
-			
+
 			$fields[] = array(
-				'label' => 'Show avatar markers in comments',
-				'tags' => 'NAME="marker_plugin_a_c"',
-				'value' => qa_opt('marker_plugin_a_c'),
-				'type' => 'checkbox',
+				'label' => 'Marker text to show after Moderator names',
+				'tags' => 'NAME="marker_plugin_who_text_moderator"',
+				'value' => qa_opt('marker_plugin_who_text_moderator'),
+				'type' => 'textarea',
+				'rows' => 1
 			);
+
 			$fields[] = array(
-				'type' => 'blank',
-			);			
-			$fields[] = array(
-				'label' => 'Marker text to show before names',
-				'tags' => 'NAME="marker_plugin_who_text"',
-				'value' => qa_opt('marker_plugin_who_text'),
+				'label' => 'Marker text to show after Editor names',
+				'tags' => 'NAME="marker_plugin_who_text_editor"',
+				'value' => qa_opt('marker_plugin_who_text_expert'),
+				'type' => 'textarea',
+				'rows' => 1
 			);
+
 			$fields[] = array(
-				'label' => 'Show markers before names in questions on pages',
+				'label' => 'Marker text to show after Expert names',
+				'tags' => 'NAME="marker_plugin_who_text_expert"',
+				'value' => qa_opt('marker_plugin_who_text_editor'),
+				'type' => 'textarea',
+				'rows' => 1
+			);
+
+			$fields[] = array(
+				'label' => 'Show marker after names in questions on pages',
 				'tags' => 'NAME="marker_plugin_w_qv"',
 				'value' => qa_opt('marker_plugin_w_qv'),
 				'type' => 'checkbox',
 			);
+			
 			$fields[] = array(
-				'label' => 'Show markers before names in questions in lists',
+				'label' => 'Show marker after names in questions in lists',
 				'tags' => 'NAME="marker_plugin_w_qi"',
 				'value' => qa_opt('marker_plugin_w_qi'),
 				'type' => 'checkbox',
 			);
 			
 			$fields[] = array(
-				'label' => 'Show markers before names in answers',
+				'label' => 'Show marker after names in answers',
 				'tags' => 'NAME="marker_plugin_w_a"',
 				'value' => qa_opt('marker_plugin_w_a'),
 				'type' => 'checkbox',
 			);
 			
 			$fields[] = array(
-				'label' => 'Show markers before names in comments',
+				'label' => 'Show marker after names in comments',
 				'tags' => 'NAME="marker_plugin_w_c"',
 				'value' => qa_opt('marker_plugin_w_c'),
 				'type' => 'checkbox',
 			);
 			$fields[] = array(
-				'label' => 'Show markers before names in users list',
+				'label' => 'Show marker after names in users list',
 				'tags' => 'NAME="marker_plugin_w_users"',
 				'value' => qa_opt('marker_plugin_w_users'),
 				'type' => 'checkbox',
 			);
 			
-/*
-			$fields[] = array(
-				'label' => 'Show Twitter button',
-				'tags' => 'NAME="share_plugin_twitter"',
-				'value' => qa_opt('share_plugin_twitter'),
-				'type' => 'checkbox',
-			);
-
-			$fields[] = array(
-				'label' => 'Show Google+ button',
-				'tags' => 'NAME="share_plugin_google"',
-				'value' => qa_opt('share_plugin_google'),
-				'type' => 'checkbox',
-			);
-						
-			$fields[] = array(
-				'label' => 'Show LinkedIn button',
-				'tags' => 'NAME="share_plugin_linkedin"',
-				'value' => qa_opt('share_plugin_linkedin'),
-				'type' => 'checkbox',
-			);
-			
-						
-			$fields[] = array(
-				'label' => 'Show email button',
-				'tags' => 'NAME="share_plugin_email"',
-				'value' => qa_opt('share_plugin_email'),
-				'type' => 'checkbox',
-			);
-			
-			$fields[] = array(
-				'type' => 'blank',
-			);
-			
-			$fields[] = array(
-				'label' => 'Facebook button weight:',
-				'tags' => 'NAME="share_plugin_facebook_weight" title="smaller values come before larger values in the DOM"',
-				'value' => qa_opt('share_plugin_facebook_weight'),
-				'type' => 'number',
-			);
-			
-			$fields[] = array(
-				'label' => 'Twitter button weight:',
-				'tags' => 'NAME="share_plugin_twitter_weight" title="smaller values come before larger values in the DOM"',
-				'value' => qa_opt('share_plugin_twitter_weight'),
-				'type' => 'number',
-			);
-
-			$fields[] = array(
-				'label' => 'Google+ button weight:',
-				'tags' => 'NAME="share_plugin_google_weight" title="smaller values come before larger values in the DOM"',
-				'value' => qa_opt('share_plugin_google_weight'),
-				'type' => 'number',
-			);
-						
-			$fields[] = array(
-				'label' => 'LinkedIn button weight:',
-				'tags' => 'NAME="share_plugin_linkedin_weight" title="smaller values come before larger values in the DOM"',
-				'value' => qa_opt('share_plugin_linkedin_weight'),
-				'type' => 'number',
-			);
-						
-			$fields[] = array(
-				'label' => 'Email button weight:',
-				'tags' => 'NAME="share_plugin_email_weight" title="smaller values come before larger values in the DOM"',
-				'value' => qa_opt('share_plugin_email_weight'),
-				'type' => 'number',
-			);
-
-			$fields[] = array(
-				'type' => 'blank',
-			);			
-			
-
-									
-			$fields[] = array(
-				'label' => 'Widget only',
-				'tags' => 'NAME="share_plugin_widget_only"',
-				'value' => qa_opt('share_plugin_widget_only'),
-				'type' => 'checkbox',
-				'note' => 'disables inline buttons - widget must be enabled via admin/layout',
-			);
-			$fields[] = array(
-				'label' => 'Widget Title',
-				'tags' => 'NAME="share_plugin_widget_title"',
-				'value' => qa_opt('share_plugin_widget_title'),
-			);
-
-			$fields[] = array(
-				'type' => 'blank',
-			);			
-			
-			$fields[] = array(
-				'label' => 'Show notification text while there are still no answers to a question',
-				'tags' => 'NAME="share_plugin_suggest" onclick="if(this.checked) jQuery(\'#share_options_container\').fadeIn(); else jQuery(\'#share_options_container\').fadeOut();"',
-				'value' => qa_opt('share_plugin_suggest'),
-				'type' => 'checkbox',
-				'note' => '<table id="share_options_container" style="display:'.(qa_opt('share_plugin_suggest')?'block':'none').'"><tr><td>',
-			);		
-							
-			$fields[] = array(
-				'tags' => 'NAME="share_plugin_suggest_text"',
-				'value' => qa_opt('share_plugin_suggest_text'),
-				'type' => 'text',
-				'note' => '<i style="font-size:10px;">(use <b>#</b> to specify button location)</i></td></tr></table>',
-			);						
-
-			$fields[] = array(
-				'type' => 'blank',
-			);			
-*/						
+	
 			return array(
 				'ok' => ($ok && !isset($error)) ? $ok : null,
 				
