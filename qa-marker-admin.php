@@ -65,8 +65,8 @@
 				qa_opt('marker_plugin_css_2',qa_post_text('marker_plugin_css_2'));
 				qa_opt('marker_plugin_who_text_admin',qa_post_text('marker_plugin_who_text_admin'));
 				qa_opt('marker_plugin_who_text_moderator',qa_post_text('marker_plugin_who_text_moderator'));
-				qa_opt('marker_plugin_who_text_editor',qa_post_text('marker_plugin_who_text_expert'));
-				qa_opt('marker_plugin_who_text_expert',qa_post_text('marker_plugin_who_text_editor'));
+				qa_opt('marker_plugin_who_text_editor',qa_post_text('marker_plugin_who_text_editor'));
+				qa_opt('marker_plugin_who_text_expert',qa_post_text('marker_plugin_who_text_expert'));
 
 				qa_opt('marker_plugin_w_users',(bool)qa_post_text('marker_plugin_w_users'));
 				qa_opt('marker_plugin_w_qv',(bool)qa_post_text('marker_plugin_w_qv'));
@@ -120,7 +120,7 @@
 			$fields[] = array(
 				'label' => 'Marker text to show after Editor names',
 				'tags' => 'NAME="marker_plugin_who_text_editor"',
-				'value' => qa_opt('marker_plugin_who_text_expert'),
+				'value' => qa_opt('marker_plugin_who_text_editor'),
 				'type' => 'textarea',
 				'rows' => 1
 			);
@@ -128,7 +128,7 @@
 			$fields[] = array(
 				'label' => 'Marker text to show after Expert names',
 				'tags' => 'NAME="marker_plugin_who_text_expert"',
-				'value' => qa_opt('marker_plugin_who_text_editor'),
+				'value' => qa_opt('marker_plugin_who_text_expert'),
 				'type' => 'textarea',
 				'rows' => 1
 			);
